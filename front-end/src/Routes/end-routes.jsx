@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import EndLayout from "../Layout/End-layout"
 import { Homepage } from "../Pages/Home"
-import { CartPage } from "../Pages/CartPAge"
+import { CartPage } from "../Pages/CartPage"
 
 const EndRoute = () => {
 
