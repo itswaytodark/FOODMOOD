@@ -33,14 +33,7 @@ export const CartPage = () => {
             <p className="text-gray-600 text-lg mb-4">
               Your cart is empty. Add something delicious! 🍝
             </p>
-            <motion.img
-              src="/empty-cart.svg"
-              alt="Empty Cart"
-              className="mx-auto w-56 opacity-90"
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5 }}
-            />
+            
           </motion.div>
         ) : (
           <div className="flex flex-col lg:flex-row gap-10">
@@ -48,66 +41,71 @@ export const CartPage = () => {
             <div className="flex-1 space-y-4 mb-8">
               <AnimatePresence>
                 {cart.map((item) => (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 30 }}
-                    transition={{ duration: 0.3 }}
-                    whileHover={{ scale: 1.01 }}
-                    className="flex items-center justify-between bg-white shadow-md rounded-2xl p-4 sm:p-5 border border-gray-100"
-                  >
-                    {/* Left: Image & Info */}
-                    <div className="flex items-center gap-4">
-                      <motion.img
-                        src={item.img}
-                        alt={item.name}
-                        className="w-20 h-20 rounded-xl object-cover"
-                        whileHover={{ scale: 1.05 }}
-                      />
-                      <div>
-                        <h2 className="text-lg font-semibold">{item.name}</h2>
-                        <p className="text-sm text-gray-500">
-                          ₹{item.price} • {item.calories || 250} cal
-                        </p>
-                      </div>
-                    </div>
+  <motion.div
+    key={item.id}
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: 30 }}
+    transition={{ duration: 0.3 }}
+    whileHover={{ scale: 1.01 }}
+    className="bg-white shadow-md rounded-2xl p-4 sm:p-5 border border-gray-100"
+  >
+    {/* ✅ Top Section: Image + Info */}
+    <div className="flex items-center gap-4">
+      <motion.img
+        src={item.img}
+        alt={item.name}
+        className="w-20 h-20 rounded-xl object-cover flex-shrink-0"
+        whileHover={{ scale: 1.05 }}
+      />
+      <div className="flex-1">
+        <h2 className="text-lg font-semibold text-gray-800 break-words">
+          {item.name}
+        </h2>
+        <p className="text-sm text-gray-500">
+          ₹{item.price} • {item.calories || 250} cal
+        </p>
+      </div>
+    </div>
 
-                    {/* Right: Quantity Controls */}
-                    <div className="flex items-center gap-3">
-                      <button
-                        onClick={() => decreaseQty(item.id)}
-                        className="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition"
-                      >
-                        <Minus className="w-4 h-4 text-gray-700" />
-                      </button>
+    {/* ✅ Bottom Section: Controls (on mobile below, on desktop right) */}
+    <div className="flex justify-end sm:justify-between items-center mt-4 flex-wrap sm:flex-nowrap">
+      <div className="flex items-center gap-3 mx-auto sm:mx-0">
+        <button
+          onClick={() => decreaseQty(item.id)}
+          className="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition"
+        >
+          <Minus className="w-4 h-4 text-gray-700" />
+        </button>
 
-                      <motion.span
-                        key={item.qty}
-                        initial={{ scale: 0.9 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: "spring", stiffness: 120 }}
-                        className="font-semibold min-w-[20px] text-center"
-                      >
-                        {item.qty}
-                      </motion.span>
+        <motion.span
+          key={item.qty}
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          transition={{ type: 'spring', stiffness: 120 }}
+          className="font-semibold min-w-[20px] text-center"
+        >
+          {item.qty}
+        </motion.span>
 
-                      <button
-                        onClick={() => increaseQty(item.id)}
-                        className="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition"
-                      >
-                        <Plus className="w-4 h-4 text-gray-700" />
-                      </button>
+        <button
+          onClick={() => increaseQty(item.id)}
+          className="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition"
+        >
+          <Plus className="w-4 h-4 text-gray-700" />
+        </button>
 
-                      <button
-                        onClick={() => removeFromCart(item.id)}
-                        className="ml-2 p-2 hover:bg-red-100 rounded-lg transition"
-                      >
-                        <Trash2 className="w-5 h-5 text-red-500" />
-                      </button>
-                    </div>
-                  </motion.div>
-                ))}
+        <button
+          onClick={() => removeFromCart(item.id)}
+          className="ml-2 p-2 hover:bg-red-100 rounded-lg transition"
+        >
+          <Trash2 className="w-5 h-5 text-red-500" />
+        </button>
+      </div>
+    </div>
+  </motion.div>
+))}
+
               </AnimatePresence>
             </div>
 
