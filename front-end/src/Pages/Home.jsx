@@ -168,7 +168,7 @@ export const Homepage = () => {
           <button
             key={cat}
             onClick={() => setCategory(cat)}
-            className={`flex-shrink-0 px-4 py-2 rounded-full border ${
+            className={` px-4 py-2 rounded-full border ${
               category === cat
                 ? "bg-fuchsia-500 text-white"
                 : "bg-gray-100 hover:bg-gray-200"

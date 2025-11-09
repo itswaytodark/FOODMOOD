@@ -1,5 +1,4 @@
-import { useState } from "react";
-// ❌ Removed AnimatePresence import - it belongs in the parent (Homepage.jsx)
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 
@@ -12,9 +11,27 @@ const QUESTIONS = [
 ];
 
 export const QuizPopup = ({ onComplete, onClose }) => {
-    // Removed internal 'show' state
     const [answers, setAnswers] = useState({});
     const [step, setStep] = useState(0);
+
+    // ⭐ ROBUST SCROLL LOCK FIX
+    useEffect(() => {
+        const body = document.body;
+        
+        // 1. Calculate scrollbar width to prevent page jump
+        const scrollbarWidth = window.innerWidth - body.clientWidth;
+        
+        // 2. Apply scroll lock styles
+        body.style.overflow = 'hidden';
+        body.style.paddingRight = `${scrollbarWidth}px`; // Compensate for removed scrollbar
+
+        // 3. Cleanup function: Restore original styles when component unmounts
+        return () => {
+            body.style.overflow = 'unset';
+            body.style.paddingRight = '0';
+        };
+    }, []); 
+
 
     const handleAnswer = (option) => {
         const q = QUESTIONS[step];
@@ -34,10 +51,10 @@ export const QuizPopup = ({ onComplete, onClose }) => {
     }
 
     return (
-       
+        // The overlay itself maintains 'fixed inset-0' to stick to the viewport
         <motion.div
             className="fixed inset-0 flex justify-center items-center z-50 bg-gradient-to-br from-pink-100/80
-             via-fuchsia-100/90 to-purple-200/90 backdrop-blur-sm"
+            via-fuchsia-100/90 to-purple-200/90 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -68,8 +85,8 @@ export const QuizPopup = ({ onComplete, onClose }) => {
                             <button
                                 key={option}
                                 onClick={() => handleAnswer(option)}
-                                className="bg-gray-100 hover:bg-fuchsia-500 hover:text-white 
-transition-all p-3 rounded-xl text-sm sm:text-base font-medium shadow-md"
+                                className="bg-gray-100 hover:bg-fuchsia-500 hover:text-white 
+                                transition-all p-3 rounded-xl text-sm sm:text-base font-medium shadow-md"
                             >
                                 {option}
                             </button>
