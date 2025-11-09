@@ -7,8 +7,8 @@ body {
 
 /* Custom CSS to hide the scrollbar on elements with the 'no-scrollbar' class */
 
-/* For Chrome, Safari, and Opera */
+/* For Chrome, Safari, and Opera
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
-
+ */
