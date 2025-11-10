@@ -8,9 +8,9 @@ import { LoadingPopup } from "../components/LoadingPopup";
 
 // The static quiz data from QuizPopup.jsx is needed to interpret the answers
 const QUESTIONS = [
-  { id: 1, question: "How’s your mood today?", options: ["Happy", "Tired", "Stressed", "Chill", "Adventurous"] },
-  { id: 2, question: "What level of spice do you want?", options: ["Mild", "Medium", "Hot", "Very Hot"] },
-  { id: 3, question: "Are you craving something sweet?", options: ["Yes", "No", "Maybe later"] },
+  { id: 1, question: "How’s your mood today?", options: ["Happy", "Tired", "Stressed", "Chill"] },
+  { id: 2, question: "What level of spice do you want?", options: ["Mild", "Medium", "Hot"] },
+  { id: 3, question: "Are you craving something sweet?", options: ["Yes", "No"]},
   { id: 4, question: "What time of day is it for you?", options: ["Morning", "Afternoon", "Evening", "Late Night"] },
   { id: 5, question: "Would you like something heavy or light?", options: ["Light", "Balanced", "Heavy"] },
 ];
