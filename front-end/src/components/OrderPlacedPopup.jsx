@@ -80,7 +80,7 @@ export const OrderPlacedPopup = ({ onDismiss }) => {
                 {/* Checkmark Icon with Animation */}
                 <motion.div
                     // Changed back to fuchsia for consistency, but keeping your preference if needed
-                    className="text-fuchsia-600 mb-4" 
+                    className="text-emerald-400 mb-4" 
                     variants={iconVariants}
                     initial="initial"
                     animate="animate"
