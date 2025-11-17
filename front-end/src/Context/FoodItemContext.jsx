@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-export const FoodItemContext = createContext([]); // ✅ Default = empty array
+export const FoodItemContext = createContext([]); 
 
 export const FoodItemProvider = ({ children }) => {
   const foodItems = [

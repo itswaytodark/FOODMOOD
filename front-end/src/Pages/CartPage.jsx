@@ -1,29 +1,25 @@
-import { useState } from "react"; // ⭐ Import useState
+import { useState } from "react"; 
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "../Context/CartContext";
 import { Plus, Minus, Trash2, ShoppingBag } from "lucide-react";
-// ⭐ Import the popup component
-import { OrderPlacedPopup } from "../components/OrderPlacedPopup"; // Adjust path as needed
+import { OrderPlacedPopup } from "../components/OrderPlacedPopup"; 
 
 export const CartPage = () => {
   const { cart, increaseQty, decreaseQty, removeFromCart, totalPrice } = useCart();
   
-  // ⭐ State to control the popup visibility
+
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  // Charges Logic
   const deliveryCharge = totalPrice > 0 ? 40 : 0;
   const gst = +(totalPrice * 0.05).toFixed(2);
   const discount = totalPrice >= 500 ? 150 : 0;
   const grandTotal = totalPrice + deliveryCharge + gst - discount;
 
-  // ⭐ Handler for the button click
+  
   const handlePlaceOrder = () => {
-    // 1. You could add final validation here
-    
-    // 2. Show the confirmation popup
+
     setShowConfirmation(true);
-    // The popup handles clearing the cart and dismissing itself after 4s
+   
   };
 
   return (
@@ -52,7 +48,7 @@ export const CartPage = () => {
           </motion.div>
         ) : (
           <div className="flex flex-col lg:flex-row gap-10">
-            {/* LEFT: Cart Items */}
+           
             <div className="flex-1 space-y-4 mb-8">
               <AnimatePresence>
                 {cart.map((item) => (
@@ -65,7 +61,7 @@ export const CartPage = () => {
                     whileHover={{ scale: 1.01 }}
                     className="bg-white shadow-md rounded-2xl p-4 sm:p-5 border border-gray-100"
                   >
-                    {/* ✅ Top Section: Image + Info */}
+                  
                     <div className="flex items-center gap-4">
                       <motion.img
                         src={item.img}
@@ -83,7 +79,6 @@ export const CartPage = () => {
                       </div>
                     </div>
 
-                    {/* ✅ Bottom Section: Controls (on mobile below, on desktop right) */}
                     <div className="flex justify-end sm:justify-between items-center mt-4 flex-wrap sm:flex-nowrap">
                       <div className="flex items-center gap-3 mx-auto sm:mx-0">
                         <button
@@ -124,12 +119,12 @@ export const CartPage = () => {
               </AnimatePresence>
             </div>
 
-            {/* RIGHT: Summary Section */}
+       
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
-              // Note: Kept sticky property as you provided it, but be cautious of click issues!
+            
               className="lg:w-[380px] w-full lg:sticky lg:top-10 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 self-start" 
             >
               <h2 className="text-xl font-bold text-gray-800 mb-4">Bill Summary</h2>
@@ -167,7 +162,7 @@ export const CartPage = () => {
               </div>
 
               <button 
-                onClick={handlePlaceOrder} // ⭐ Added the click handler
+                onClick={handlePlaceOrder} 
                 className="w-full mt-6 bg-fuchsia-600 text-white font-semibold py-3 rounded-xl hover:bg-fuchsia-700 transition-all shadow-md"
               >
                 Proceed to Checkout
@@ -177,7 +172,7 @@ export const CartPage = () => {
         )}
       </motion.div>
       
-      {/* ⭐ Popup Render: This ensures the overlay appears on top of everything */}
+      
       <AnimatePresence>
         {showConfirmation && (
           <OrderPlacedPopup onDismiss={() => setShowConfirmation(false)} />

@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { useEffect } from "react";
-// ⭐ Import useNavigate from react-router-dom
 import { useNavigate } from "react-router-dom"; 
 import { useCart } from '../Context/CartContext'; 
 
-// Animation variants for the main container (PopupVariants and IconVariants remain the same)
+
 const popupVariants = {
     hidden: { opacity: 0, scale: 0.8, y: 50 },
     visible: { 
@@ -32,15 +31,13 @@ const iconVariants = {
 
 export const OrderPlacedPopup = ({ onDismiss }) => {
     const { clearCart } = useCart();
-    // ⭐ Initialize navigate hook
+
     const navigate = useNavigate(); 
 
-    // Function to handle automatic dismissal and navigation
     const handleDismissAndNavigate = () => {
-        // 1. Start dismissal animation/process
+     
         onDismiss(); 
-        // 2. Navigate to the homepage (or any route, e.g., '/orders')
-        // We use replace: true to prevent the user from navigating back to the cart page
+        
         navigate('/', { replace: true }); 
     };
 
@@ -48,17 +45,17 @@ export const OrderPlacedPopup = ({ onDismiss }) => {
         document.body.style.overflow = 'hidden'; 
         clearCart(); 
 
-        // ⭐ Set a timer to automatically dismiss AND navigate after 4 seconds
+       
         const timer = setTimeout(() => {
             handleDismissAndNavigate();
         }, 4000); 
 
-        // Cleanup: Clear timer and re-enable scrolling
+       
         return () => {
             clearTimeout(timer);
             document.body.style.overflow = 'auto'; 
         };
-    }, [clearCart, onDismiss, navigate]); // Added navigate to the dependency array
+    }, [clearCart, onDismiss, navigate]); 
 
 
     return (
@@ -77,9 +74,9 @@ export const OrderPlacedPopup = ({ onDismiss }) => {
                 exit="exit"
             >
                 
-                {/* Checkmark Icon with Animation */}
+            
                 <motion.div
-                    // Changed back to fuchsia for consistency, but keeping your preference if needed
+                   
                     className="text-emerald-400 mb-4" 
                     variants={iconVariants}
                     initial="initial"
@@ -88,7 +85,7 @@ export const OrderPlacedPopup = ({ onDismiss }) => {
                     <CheckCircle className="w-16 h-16" />
                 </motion.div>
 
-                {/* Content */}
+               
                 <h2 className="text-3xl font-extrabold text-gray-800 mb-2 text-center">
                     Order Placed!
                 </h2>
@@ -96,9 +93,9 @@ export const OrderPlacedPopup = ({ onDismiss }) => {
                     Your delicious meal is now being prepared by the chef.
                 </p>
 
-                {/* Call to Action - Now triggers the navigation */}
+             
                 <button
-                    onClick={handleDismissAndNavigate} // ⭐ Updated handler
+                    onClick={handleDismissAndNavigate} 
                     className="px-6 py-2 bg-fuchsia-400 text-white font-semibold rounded-full 
                                hover:bg-fuchsia-500 transition duration-150 shadow-md"
                 >

@@ -3,29 +3,28 @@ import { motion } from "framer-motion";
 import { X } from "lucide-react";
 
 const QUESTIONS = [
-    { id: 1, question: "How’s your mood today?", options: ["Happy", "Tired", "Stressed", "Chill"] },
-    { id: 2, question: "What level of spice do you want?", options: ["Mild", "Medium", "Hot", "Very Hot"] },
-    { id: 3, question: "Are you craving something sweet?", options: ["Yes", "No"] },
-    { id: 4, question: "What time of day is it for you?", options: ["Morning", "Afternoon", "Evening", "Late Night"] },
-    { id: 5, question: "Would you like something heavy or light?", options: ["Light", "Balanced", "Heavy"] },
+  { id: 1, question: "How's your mood today?", options: ["Happy", "Tired", "Stressed", "Chill"] },
+  { id: 2, question: "What level of spice do you want?", options: ["Mild", "Medium", "Hot"] },
+  { id: 3, question: "Do you eat Veg or non-veg?", options: ["Veg", "Non-veg"] },
+  { id: 4, question: "What time of day is it for you?", options: ["Morning", "Afternoon", "Evening", "Late Night"] },
+  { id: 5, question: "Would you like something heavy or light?", options: ["Light", "Balanced", "Heavy"] },
 ];
 
 export const QuizPopup = ({ onComplete, onClose }) => {
     const [answers, setAnswers] = useState({});
     const [step, setStep] = useState(0);
 
-    // ⭐ ROBUST SCROLL LOCK FIX
+   
     useEffect(() => {
         const body = document.body;
         
-        // 1. Calculate scrollbar width to prevent page jump
+       
         const scrollbarWidth = window.innerWidth - body.clientWidth;
         
-        // 2. Apply scroll lock styles
+    
         body.style.overflow = 'hidden';
-        body.style.paddingRight = `${scrollbarWidth}px`; // Compensate for removed scrollbar
-
-        // 3. Cleanup function: Restore original styles when component unmounts
+        body.style.paddingRight = `${scrollbarWidth}px`; 
+   
         return () => {
             body.style.overflow = 'unset';
             body.style.paddingRight = '0';
@@ -51,7 +50,7 @@ export const QuizPopup = ({ onComplete, onClose }) => {
     }
 
     return (
-        // The overlay itself maintains 'fixed inset-0' to stick to the viewport
+        
         <motion.div
             className="fixed inset-0 flex justify-center items-center z-50 bg-gradient-to-br from-pink-100/80
             via-fuchsia-100/90 to-purple-200/90 backdrop-blur-sm"
